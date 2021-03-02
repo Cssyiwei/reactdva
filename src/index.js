@@ -1,6 +1,7 @@
 import dva from "dva";
-import "./index.css";
+import "./assets/css/base.less";
 import "./utils/layout.js";
+// import "antd/dist/antd.less";
 // 1. Initialize
 const app = dva();
 

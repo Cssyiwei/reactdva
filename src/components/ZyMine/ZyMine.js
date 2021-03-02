@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "dva";
-import Index from "../Index/Index";
+import TabBar from "../TabBar/TabBar";
 
 class ZyMine extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ZyMine extends React.Component {
     return (
       <div>
         <h1>ZyMine</h1>
-        <Index history={this.props.history} />
+        <TabBar history={this.props.history} match={this.props.match} />
       </div>
     );
   }

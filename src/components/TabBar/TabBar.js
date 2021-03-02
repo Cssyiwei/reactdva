@@ -1,9 +1,9 @@
 import React from "react";
-import { connect } from "dva";
-import { Link } from "dva/router";
-import style from "./index.scss";
+// import { connect } from "dva";
+// import { Link } from "dva/router";
+import style from "./tabbar.less";
 
-class Index extends React.Component {
+class TabBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,20 +16,23 @@ class Index extends React.Component {
     };
   }
   handleClickEvent(path) {
-    console.log(path);
     this.props.history.push(path);
   }
   render() {
-    // const { path, url, params } = this.props.match;
+    const { path, url, params } = this.props.match;
 
-    // console.log(path, url, params);
+    console.log(path, url, params);
     return (
-      <div>
+      <div className={style.tabBar_wrap}>
         {/* {this.props.children} */}
         <ul className={style.tarbar}>
           {this.state.routeList.map((item, index) => {
             return (
-              <li onClick={() => this.handleClickEvent(item.path)} key={index}>
+              <li
+                onClick={() => this.handleClickEvent(item.path)}
+                key={index}
+                className={item.path === path ? style.red : ""}
+              >
                 {item.name}
               </li>
             );
@@ -43,4 +46,4 @@ class Index extends React.Component {
     );
   }
 }
-export default connect()(Index);
+export default TabBar;
