@@ -1,45 +1,68 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Router, Route, Switch } from "dva/router";
+
+// const ZyHome = lazy(() => import('./components/ZyHome/ZyHome'));
+// const ZyFund = lazy(() => import('./components/ZyFund/ZyFund'));
+// const ZyCapital = lazy(() => import('./components/ZyCapital/ZyCapital'));
+// const ZyMine = lazy(() => import('./components/ZyMine/ZyMine'));
+// const NotFound = lazy(() => import('./components/NotFound/NotFound'));
+
 import ZyHome from "./components/ZyHome/ZyHome";
 import ZyFund from "./components/ZyFund/ZyFund";
 import ZyCapital from "./components/ZyCapital/ZyCapital";
 import ZyMine from "./components/ZyMine/ZyMine";
 import NotFound from "./components/NotFound/NotFound";
+import Login from "./components/Login/Login";
+
 const routerList = [
   {
-    name: "首页",
+    title: "首页",
     component: ZyHome,
     path: "/zyhome",
     exact: true,
   },
   {
-    name: "基金",
+    title: "基金",
     component: ZyFund,
     path: "/zyfund",
     exact: true,
   },
   {
-    name: "资产",
+    title: "资产",
     component: ZyCapital,
     path: "/zycapital",
     exact: true,
   },
   {
-    name: "我的",
+    title: "我的",
     component: ZyMine,
     path: "/zymine",
     exact: true,
   },
   {
-    name: "notFund",
+    title: "登录",
+    component: Login,
+    path: "/login",
+    exact: true,
+  },
+  {
+    title: "notFund",
     component: NotFound,
     path: "",
     exact: true,
   },
 ];
 function RouterConfig({ history }) {
+  useEffect(() => {
+    // 使用浏览器的 API 更新页面标题
+    history.listen(({ pathname }) => {
+      const item = routerList.find((item) => item.path === pathname);
+      document.title = item.title || "中银基金";
+    });
+  });
   return (
     <Router history={history}>
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
       <Switch>
         {routerList.map((item) => (
           <Route
@@ -47,6 +70,7 @@ function RouterConfig({ history }) {
             path={item.path}
             component={item.component}
             key={item.path}
+            title={item.title}
           ></Route>
         ))}
         {/* <Route exact path="/zyhome" component={ZyHome}></Route>
@@ -55,6 +79,7 @@ function RouterConfig({ history }) {
         <Route exact path="/zymine" component={ZyMine}></Route>
         <Route component={NotFound} /> */}
       </Switch>
+      {/* </Suspense> */}
     </Router>
   );
 }

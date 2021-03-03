@@ -1,6 +1,5 @@
 import React from "react";
 // import { connect } from "dva";
-// import { Link } from "dva/router";
 import style from "./tabbar.less";
 
 class TabBar extends React.Component {
@@ -8,10 +7,30 @@ class TabBar extends React.Component {
     super(props);
     this.state = {
       routeList: [
-        { path: "/zyhome", name: "首页" },
-        { path: "/zyfund", name: "基金" },
-        { path: "/zycapital", name: "资产" },
-        { path: "/zymine", name: "我的" },
+        {
+          path: "/zyhome",
+          name: "首页",
+          imgUrl: require("../../assets/home/icon_tab_home_normal.png"),
+          imgActive: require("../../assets/home/icon_tab_home_click.png"),
+        },
+        {
+          path: "/zyfund",
+          name: "基金",
+          imgUrl: require("../../assets/home/icon_tab_jijin_normal.png"),
+          imgActive: require("../../assets/home/icon_tab_jijin_click.png"),
+        },
+        {
+          path: "/zycapital",
+          name: "资产",
+          imgUrl: require("../../assets/home/icon_tab_zichan_normal.png"),
+          imgActive: require("../../assets/home/icon_tab_zichan_click.png"),
+        },
+        {
+          path: "/zymine",
+          name: "我的",
+          imgUrl: require("../../assets/home/icon_tab_mine_normal.png"),
+          imgActive: require("../../assets/home/icon_tab_mine_click.png"),
+        },
       ],
     };
   }
@@ -19,9 +38,7 @@ class TabBar extends React.Component {
     this.props.history.push(path);
   }
   render() {
-    const { path, url, params } = this.props.match;
-
-    console.log(path, url, params);
+    const { path } = this.props.match;
     return (
       <div className={style.tabBar_wrap}>
         {/* {this.props.children} */}
@@ -31,16 +48,16 @@ class TabBar extends React.Component {
               <li
                 onClick={() => this.handleClickEvent(item.path)}
                 key={index}
-                className={item.path === path ? style.red : ""}
+                className={item.path === path ? style.active : ""}
               >
-                {item.name}
+                <img
+                  src={item.path === path ? item.imgActive : item.imgUrl}
+                  alt=""
+                ></img>
+                <p>{item.name}</p>
               </li>
             );
           })}
-          {/* <li onClick={() => this.handleClickEvent()}>
-            首页
-            <Link to="/zyhome">首页</Link>
-          </li> */}
         </ul>
       </div>
     );

@@ -86,7 +86,7 @@ export default function request(url, method = "GET", options = { data: {} }) {
     headers: Object.assign(
       {
         Accept: "application/json, text/plain, */*",
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
         custNo: localStorage.custNo,
         custId: localStorage.custId,
         sigMode: "H5Signature",
@@ -118,20 +118,22 @@ export default function request(url, method = "GET", options = { data: {} }) {
     requestConfig.headers.needSign = "1";
   }
   if (method === "POST") {
+    console.log(url + "<=====>", data);
     let tempSig = cipherUtils.encrypt(
       JSON.stringify(data),
       "WECHAT3hsf3j35bh235b5b"
     );
-    tempSig = cipherUtils.hmacsha1("POST:" + tempSig, "WECHAT");
+    let sig = cipherUtils.hmacsha1("POST:" + tempSig, "WECHAT");
     Object.defineProperty(requestConfig, "body", {
       value: tempSig,
     });
+    requestConfig.headers.sig = sig;
     requestConfig.headers.needPostAes = "1";
   }
   return fetch(url, requestConfig)
     .then(checkStatus)
     .then(parseJSON)
-    .then((data) => ({ data }))
+    .then((data) => data)
     .catch((err) => ({ err }));
   // try {
   //   const response = await fetch(url, requestConfig);
