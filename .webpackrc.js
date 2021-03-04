@@ -1,6 +1,7 @@
 export default {
   extraBabelPlugins: [
-    ["import", { libraryName: "antd", libraryDirectory: "es", style: "css" }],
+    // ["import", { libraryName: "antd", libraryDirectory: "es", style: "css" }],
+    ["import", { libraryName: "antd-mobile", style: "css" }], // `style: true` 会加载 less 文件
   ],
   proxy: {
     "/zy": {

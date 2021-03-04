@@ -57,7 +57,7 @@ function RouterConfig({ history }) {
     // 使用浏览器的 API 更新页面标题
     history.listen(({ pathname }) => {
       const item = routerList.find((item) => item.path === pathname);
-      document.title = item.title || "中银基金";
+      document.title = (item && item.title) || "中银基金";
     });
   });
   return (

@@ -4,24 +4,26 @@ import { qlzccx } from "../../services/example.js";
 
 function Login(props) {
   return (
-    <section className={style.home_header}>
-      <div className={style.title_wrap}>
-        <p className={style.title}>中国银行控股</p>
-        <p className={style.title}>2020年末资产管理规模达到5015亿元</p>
-        <p className={style.title}>购基费率0.1折起</p>
-      </div>
-      <div className={style.login_btn}>
-        <div
-          className={`${style.btn} ${style.btn_red}`}
-          onClick={() => props.history.push("/register")}
-        >
-          注册
+    <section>
+      <div className={style.home_header}>
+        <div className={style.title_wrap}>
+          <p className={style.title}>中国银行控股</p>
+          <p className={style.title}>2020年末资产管理规模达到5015亿元</p>
+          <p className={style.title}>购基费率0.1折起</p>
         </div>
-        <div
-          className={`${style.btn} ${style.btn_white}`}
-          onClick={() => props.history.push("/login")}
-        >
-          登录
+        <div className={style.login_btn}>
+          <div
+            className={`${style.btn} ${style.btn_red}`}
+            onClick={() => props.history.push("/register")}
+          >
+            注册
+          </div>
+          <div
+            className={`${style.btn} ${style.btn_white}`}
+            onClick={() => props.history.push("/login")}
+          >
+            登录
+          </div>
         </div>
       </div>
     </section>
@@ -43,7 +45,7 @@ function Asset(props) {
     }
     // 使用浏览器的 API 更新页面标题
     // document.title = `You clicked ${assetList} times`;
-  });
+  }, []);
   return (
     <section className={style.home_header}>
       <div className={style.title_wrap + " ta-c"}>

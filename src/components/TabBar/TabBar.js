@@ -40,7 +40,7 @@ class TabBar extends React.Component {
   render() {
     const { path } = this.props.match;
     return (
-      <div className={style.tabBar_wrap}>
+      <section className={style.tabBar_wrap}>
         {/* {this.props.children} */}
         <ul className={style.tarbar}>
           {this.state.routeList.map((item, index) => {
@@ -59,7 +59,7 @@ class TabBar extends React.Component {
             );
           })}
         </ul>
-      </div>
+      </section>
     );
   }
 }
