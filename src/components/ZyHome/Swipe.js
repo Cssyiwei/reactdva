@@ -16,7 +16,7 @@ class Swipe extends React.Component {
       .then((data) => {
         if (data.isSuccess === "0") {
           if (data.content.fundList && data.content.fundList.length > 0) {
-            this.setState({ List: data.content.fundList });
+            this.setState({ List: data.content.fundList.slice(0, 3) });
             // this.setState({ showRadio: true });
           } else {
             // this.setState({ showRadio: false });
@@ -67,7 +67,7 @@ class Swipe extends React.Component {
         <section>
           <Carousel
             autoplay
-            autoplayInterval={1000}
+            autoplayInterval={3000}
             infinite
             dotStyle={{
               width: "0.1rem",
@@ -107,7 +107,7 @@ class Swipe extends React.Component {
   }
   // 挂载函数
   componentDidMount() {
-    if (this.props.moduleNo === "29") {
+    if (this.props.moduleNo === "99") {
       this.handleTjjjlb();
     } else if (this.props.moduleNo === "5") {
       this.handleAdcolumn();

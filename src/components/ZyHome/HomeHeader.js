@@ -47,27 +47,28 @@ function Asset(props) {
     // document.title = `You clicked ${assetList} times`;
   }, []);
   return (
-    <section className={style.home_header}>
-      <div className={style.title_wrap + " ta-c"}>
-        <p className={style.title_asset}>
-          总资产(元)
-          <img
-            src={
-              showStatus
-                ? require("../../assets/position/icon_capital_can_see.png")
-                : require("../../assets/position/icon_capital_no_see.png")
-            }
-            onClick={() => {
-              setShowStatus(!showStatus);
-            }}
-            alt=""
-          />
-        </p>
-        <p className={style.asset_num}>
-          {showStatus && assetList ? assetList.totalasset1 : "****"}
-        </p>
-      </div>
-      <div className={style.income_wrap + " ta-c"}>
+    <section>
+      <div className={style.home_header}>
+        <div className={style.title_wrap + " ta-c"}>
+          <p className={style.title_asset}>
+            总资产(元)
+            <img
+              src={
+                showStatus
+                  ? require("../../assets/position/icon_capital_can_see.png")
+                  : require("../../assets/position/icon_capital_no_see.png")
+              }
+              onClick={() => {
+                setShowStatus(!showStatus);
+              }}
+              alt=""
+            />
+          </p>
+          <p className={style.asset_num}>
+            {showStatus && assetList ? assetList.totalasset1 : "****"}
+          </p>
+        </div>
+        <div className={style.income_wrap + " ta-c"}>
         <div className="">
           <p>最新收益(元)</p>
           <p>{showStatus && assetList ? assetList.dayIncome1 : "****"}</p>
@@ -76,6 +77,7 @@ function Asset(props) {
           <p>累计收益(元)</p>
           <p>{showStatus && assetList ? assetList.totalIncome1 : "****"}</p>
         </div>
+      </div>
       </div>
     </section>
   );
