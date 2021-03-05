@@ -1,19 +1,5 @@
-export default {
-  namespace: "index",
-
-  state: {},
-
-  subscriptions: {
-    setup({ dispatch, history }) {
-      // eslint-disable-line
-    },
-  },
-
-  effects: {
-    *fetch({ payload }, { call, put }) {
-      // eslint-disable-line
-    },
-  },
-
-  reducers: {},
-};
+const context = require.context("./", false, /\.js$/);
+export default context
+  .keys()
+  .filter((item) => item !== "./index.js")
+  .map((key) => context(key));

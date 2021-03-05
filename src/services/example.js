@@ -21,6 +21,12 @@ export function dl({ certNo, certType, confirmBind, dealPwd, mobile }) {
   });
 }
 
+export function khxxcx({ custId, custNo }) {
+  return request("/zy/wechat/user/khxxcx", "POST", {
+    data: { custId, custNo },
+  });
+}
+
 export function cxzxlb({ infoType }) {
   return request("/zy/wechat/query/cxzxlb", "GET", {
     data: { infoType },

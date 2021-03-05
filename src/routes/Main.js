@@ -1,9 +1,9 @@
 import React from "react";
 // import React, { useEffect } from "react";
 import { connect } from "dva";
-import { dl } from "../../services/example.js";
+import { dl } from "../services/example.js";
 
-function Login(props) {
+function Main(props) {
   // async function handleKhxxcx() {
   //   const { dispatch } = props;
   //   let data = await khxxcx({
@@ -41,7 +41,7 @@ function Login(props) {
           custNo: localStorage.custNo,
         },
       });
-      props.history.push("/zyhome");
+      // props.history.push("/zyhome");
     }
   }
   return (
@@ -55,5 +55,5 @@ function Login(props) {
   );
 }
 
-export default connect((main) => ({ main }))(Login);
+export default connect(({ main }) => ({ main }))(Main);
 // export default Login;
