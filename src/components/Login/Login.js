@@ -26,7 +26,7 @@ function Login(props) {
       certType: "0",
       confirmBind: undefined,
       dealPwd: "123123",
-      mobile: "19916933890",
+      mobile: "18111223355",
     });
     if (data.isSuccess === "0") {
       let content = data.content;

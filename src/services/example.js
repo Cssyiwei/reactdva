@@ -4,8 +4,15 @@ export function query(data) {
   return request("/zy/wechat/fund/tjjjlb", "GET", { data });
 }
 
-export function tjjjlb(data) {
-  return request("/zy/wechat/fund/tjjjlb", "GET", { data });
+export function tjjjlb({ moduleNo, careFlag }) {
+  return request("/zy/wechat/fund/tjjjlb", "GET", {
+    data: { moduleNo, careFlag },
+  });
+}
+export function ztjjlb({ position }) {
+  return request("/zy/wechat/fund/ztjjlb", "GET", {
+    data: { position },
+  });
 }
 export function cxgglb(data) {
   return request("/zy/wechat/query/cxgglb", "GET", { data });
@@ -30,5 +37,11 @@ export function khxxcx({ custId, custNo }) {
 export function cxzxlb({ infoType }) {
   return request("/zy/wechat/query/cxzxlb", "GET", {
     data: { infoType },
+  });
+}
+
+export function xtgzrcx({ subFactor }) {
+  return request("/zy/wechat/fund/xtgzrcx", "GET", {
+    data: { subFactor },
   });
 }

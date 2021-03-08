@@ -398,6 +398,7 @@ class ZyHome extends React.Component {
         <Swipe moduleNo="5" history={this.props.history} />
         {this.likeFund()}
         {this.news()}
+        {this.footer()}
         <TabBar history={this.props.history} match={this.props.match} />
       </main>
     );
