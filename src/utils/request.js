@@ -1,13 +1,17 @@
 import fetch from "dva/fetch";
 import cipherUtils from "./cipherUtils";
 
-function parseJSON(response) {
-  return response.json();
+function parseJSON(data) {
+  if (data.resultCode === "403") {
+    // window.location.href =
+      // window.location.origin + window.location.pathname + "#/login";
+  }
+  return data;
 }
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response;
+    return response.json();
   }
 
   const error = new Error(response.statusText);
@@ -86,7 +90,6 @@ export default function request(url, method = "GET", options = { data: {} }) {
     headers: Object.assign(
       {
         Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json;charset=UTF-8",
         custNo: localStorage.custNo,
         custId: localStorage.custId,
         sigMode: "H5Signature",
@@ -129,12 +132,13 @@ export default function request(url, method = "GET", options = { data: {} }) {
     });
     requestConfig.headers.sig = sig;
     requestConfig.headers.needPostAes = "1";
+    requestConfig.headers["Content-Type"] = "application/json;charset=UTF-8";
   }
   return fetch(url, requestConfig)
     .then(checkStatus)
     .then(parseJSON)
-    .then((data) => data)
     .catch((err) => ({ err }));
+  // .then((data) => data)
   // try {
   //   const response = await fetch(url, requestConfig);
   //   const responseJson = await response.json();

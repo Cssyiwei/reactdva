@@ -66,32 +66,102 @@
         }
       }
     }
-
-    // section {
-    //   position: relative;
-    //   width: 6.8rem;
-    //   height: 1.6rem;
-    //   margin: 0.18rem 0.35rem 0 0.35rem;
-    //   background: #ffffff;
-    //   box-shadow: 0 2px 8px 0 #c8c8c8;
-    //   border-radius: 10px;
-    // }
-
-    .imgLogo {
-      height: 0.4rem;
-      width: 0.4rem;
-      margin: 0.6rem 0 0.6rem 0.2rem;
+    nav {
+      position: relative;
+      z-index: 1;
+      width: 6.8rem;
+      height: 1.6rem;
+      margin: -0.24rem 0.35rem 0 0.35rem;
+      background: #ffffff;
+      box-shadow: 0 4px 10px 0 #ffeaea;
+      border-radius: 10px;
+      .navitem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .line {
+        margin: auto 0.3rem;
+        width: 0.5rem;
+        /* height: 0.38rem; */
+      }
+      .gap_line {
+        position: absolute;
+        z-index: 1;
+        width: 1px;
+        background: #e5e5e5;
+        height: 0.6rem;
+        left: 50%;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+      .line_desc {
+        font-size: 0.28rem;
+        color: #333333;
+        line-height: 1.6rem;
+        /* margin: 0.61rem 0.1rem auto 0; */
+      }
     }
+    .section {
+      position: relative;
+      width: 6.8rem;
+      height: 1.6rem;
+      margin: 0.18rem 0.35rem 0 0.35rem;
+      background: #ffffff;
+      box-shadow: 0 2px 8px 0 #c8c8c8;
+      border-radius: 10px;
+      .imgLogo {
+        height: 0.4rem;
+        width: 0.4rem;
+        margin: 0.6rem 0 0.6rem 0.2rem;
+      }
+      .childTitle {
+        font-size: 0.3rem;
+        color: #333333;
+        margin: 0.6rem 0 0 0.1rem;
+      }
+      .quickGet {
+        /* width: 0.9rem;
+        height: 0.34rem; */
+        margin: 0.3rem 0 0 0;
+        background: url("../../assets/position/pic_kuaishuquxian.png") no-repeat;
+        background-size: 100%;
+        font-size: 0.16rem;
+        text-align: center;
+        padding: 0.05rem 0.15rem 0.05rem 0.15rem;
+      }
+      .profit_tip {
+        font-family: PingFangSC-Regular;
+        font-size: 0.22rem;
+        color: #999999;
+      }
 
-    .quickGet {
-      /* width: 0.9rem;
-      height: 0.34rem; */
-      margin: 0.3rem 0 0 0;
-      background: url("../../assets/position/pic_kuaishuquxian.png") no-repeat;
-      background-size: 100%;
-      font-size: 0.16rem;
-      text-align: center;
-      padding: 0.05rem 0.15rem 0.05rem 0.15rem;
+      .profit_val {
+        font-family: PingFangSC-Medium;
+        font-size: 0.22rem;
+        color: #d51b1b;
+        margin-right: 0.24rem;
+        margin-left: 0.1rem;
+        max-width: 1.8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: top;
+      }
+      .amount_num {
+        font-family: PingFangSC-Medium;
+        font-size: 0.3rem;
+        color: #d51b1b;
+        text-align: right;
+      }
+      .incomClass {
+        position: absolute;
+        bottom: 0.24rem;
+        right: 0rem;
+        text-align: right;
+        height: 0.22rem;
+        line-height: 0.22rem;
+      }
     }
 
     // li {
@@ -107,56 +177,12 @@
       line-height: 0.38rem;
     }
 
-    nav {
-      position: relative;
-      z-index: 1;
-      width: 6.8rem;
-      height: 1.6rem;
-      margin: 3.3rem 0.35rem 0 0.35rem;
-      background: #ffffff;
-      box-shadow: 0 4px 10px 0 #ffeaea;
-      border-radius: 10px;
-    }
-
     /* nav > div > img {
       display: inline-block;
       width: 0.46rem;
       height: 0.46rem;
       padding: 0.32rem 0;
     } */
-
-    nav > div > span {
-      vertical-align: middle;
-    }
-
-    .line {
-      margin: auto 0.3rem;
-      width: 0.5rem;
-      /* height: 0.38rem; */
-    }
-
-    .line_desc {
-      font-size: 0.28rem;
-      color: #333333;
-      line-height: 1.6rem;
-      /* margin: 0.61rem 0.1rem auto 0; */
-    }
-
-    .childTitle {
-      font-size: 0.3rem;
-      color: #333333;
-      margin: 0.6rem 0 0 0.1rem;
-    }
-    .gap_line {
-      position: absolute;
-      z-index: 1;
-      width: 1px;
-      background: #e5e5e5;
-      height: 0.6rem;
-      left: 50%;
-      margin-top: 0.5rem;
-      text-align: center;
-    }
 
     .hqlc {
       width: 0.4rem;
@@ -193,44 +219,12 @@
       color: #007aff;
     }
 
-    .amount_num {
-      font-family: PingFangSC-Medium;
-      font-size: 0.3rem;
-      color: #d51b1b;
-      text-align: right;
-    }
-
     .ztzc_amount {
       font-family: PingFangSC-Medium;
       font-size: 0.3rem;
       color: #d51b1b;
     }
-    .incomClass {
-      position: absolute;
-      bottom: 0.24rem;
-      right: 0rem;
-      text-align: right;
-      height: 0.22rem;
-      line-height: 0.22rem;
-    }
-    .profit_tip {
-      font-family: PingFangSC-Regular;
-      font-size: 0.22rem;
-      color: #999999;
-    }
 
-    .profit_val {
-      font-family: PingFangSC-Medium;
-      font-size: 0.22rem;
-      color: #d51b1b;
-      margin-right: 0.24rem;
-      margin-left: 0.1rem;
-      max-width: 1.8rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      vertical-align: top;
-    }
     .green {
       color: #4ea974;
     }

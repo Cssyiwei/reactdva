@@ -41,7 +41,7 @@ export function cxzxlb({ infoType }) {
 }
 
 export function xtgzrcx({ subFactor }) {
-  return request("/zy/wechat/fund/xtgzrcx", "GET", {
+  return request("/zy/wechat/fund/xtgzrcx", "POST", {
     data: { subFactor },
   });
 }
