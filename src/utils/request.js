@@ -3,8 +3,8 @@ import cipherUtils from "./cipherUtils";
 
 function parseJSON(data) {
   if (data.resultCode === "403") {
-    // window.location.href =
-      // window.location.origin + window.location.pathname + "#/login";
+    window.location.href =
+      window.location.origin + window.location.pathname + "#/login";
   }
   return data;
 }

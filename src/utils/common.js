@@ -99,3 +99,13 @@ export function dateFormatNew(date) {
   }
   return str;
 }
+
+/* eslint-disable */
+// 判断wx环境 不能支持eslint === 无法判断出来
+export const isWeChat = function () {
+  const ua = navigator.userAgent.toLowerCase();
+  if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+    return true;
+  }
+  return false;
+};

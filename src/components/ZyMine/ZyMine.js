@@ -1,28 +1,100 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "dva";
 import TabBar from "../TabBar/TabBar";
+import { Modal } from "antd-mobile";
 import style from "./zyMine.less";
+import { RiskLevel, RiskLevelLogo } from "../../utils/commonData.js";
+import { isWeChat } from "../../utils/common.js";
+import { tcdl } from "../../services/example.js";
 
-const RiskLevel = {
-  1: "安全型",
-  2: "保守型",
-  3: "稳健型",
-  4: "积极型",
-  5: "激进型",
-};
-const RiskLevelLogo = {
-  1: require("../../assets/riskLevel/icon_type_jjxx.png"),
-  2: require("../../assets/riskLevel/icon_type_bsx.png"),
-  3: require("../../assets/riskLevel/icon_type_wjx.png"),
-  4: require("../../assets/riskLevel/icon_type_jsx.png"),
-  5: require("../../assets/riskLevel/icon_type_jjx.png"),
-};
+const alert = Modal.alert;
+
 class ZyMine extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       riskLevelText: "",
       riskLevel: "",
+      list: [
+        {
+          list: [
+            {
+              logo: require("../../assets/zymine/icon_mine_list_fxpc.png"),
+              title: "风险测评",
+              link: "",
+              isShow: true,
+            },
+            {
+              logo: require("../../assets/zymine/icon_mine_list_zczm.png"),
+              title: "资产证明",
+              link: "",
+              isShow: true,
+            },
+          ],
+        },
+        {
+          list: [
+            {
+              logo: require("../../assets/zymine/icon_mine_list_jfzx@3x.png"),
+              title: "积分中心",
+              link: "",
+              isShow: true,
+              tips: "小积分，抽大奖",
+            },
+            {
+              logo: require("../../assets/zymine/icon_mine_list_tjhy.png"),
+              title: "推荐好友",
+              link: "",
+              isShow: true,
+            },
+            {
+              logo: require("../../assets/zymine/icon-mingpian@1.5x.png"),
+              title: "我的二维码",
+              link: "",
+              isShow: false,
+              code: require("../../assets/zymine/icon_code@1.5x.png"),
+            },
+          ],
+        },
+        {
+          list: [
+            {
+              logo: require("../../assets/zymine/icon_mine_list_cjwt.png"),
+              title: "常见问题",
+              link: "",
+              isShow: true,
+            },
+            {
+              logo: require("../../assets/zymine/icon_mine_list_kefu.png"),
+              title: "在线客服",
+              link: "",
+              isShow: true,
+            },
+            {
+              logo: require("../../assets/zymine/icon_mine_list_zyzx.png"),
+              title: "关于中银",
+              link: "",
+              isShow: true,
+            },
+            {
+              logo: require("../../assets/zymine/icon_setImg.png"),
+              title: "设置",
+              link: "",
+              isShow: false,
+            },
+          ],
+        },
+        {
+          list: [
+            {
+              logo: require("../../assets/zymine/exit-logon@2x.png"),
+              title: isWeChat() ? "退出绑定" : "退出登录",
+              link: "",
+              isShow: false,
+            },
+          ],
+        },
+      ],
     };
   }
   handleKhxxcx() {
@@ -42,26 +114,53 @@ class ZyMine extends React.Component {
         } else {
           riskLevelText = RiskLevel[data.riskLevel];
         }
+        let list = this.state.list;
+        if (!localStorage.custNo && !localStorage.custId) {
+          if (data.bocimEmpFlag === "Y") {
+            list[1].list[2].isShow = true;
+          }
+        } else {
+          list[3].list[0].isShow = true;
+          list[2].list[3].isShow = true;
+        }
         this.setState({
           riskLevelText,
           riskLevel: data.riskLevel,
         });
       });
   }
-  person() {
+  handleTcdl(resolve) {
+    tcdl().then((data) => {
+      if (data.isSuccess === "0") {
+        localStorage.clear();
+        sessionStorage.clear();
+        resolve();
+        this.props.history.push("/login");
+      }
+    });
+  }
+  render_person() {
     return (
       <section className="person">
         <div className="personinfo flex-start">
-          <div className="custname">{this.props.main.userInfo.custName}</div>
-          <div className="flex-1 ml-10">
-            <p className="risklevel flex-start">
-              <img
-                className="riskimg mr-5"
-                src={RiskLevelLogo[this.state.riskLevel]}
-              />
-              {this.state.riskLevelText}
-            </p>
-          </div>
+          {Object.keys(this.props.main.userInfo).length > 0 ? (
+            <Fragment>
+              <div className="custname">
+                {this.props.main.userInfo.custName}
+              </div>
+              <div className="flex-1 ml-10">
+                <p className="risklevel flex-start">
+                  <img
+                    className="riskimg mr-5"
+                    src={RiskLevelLogo[this.state.riskLevel]}
+                  />
+                  {this.state.riskLevelText}
+                </p>
+              </div>
+            </Fragment>
+          ) : (
+            <div className="login">登录/注册</div>
+          )}
           <img
             className="moreimg"
             src={require("../../assets/zymine/more@2x.png")}
@@ -89,8 +188,73 @@ class ZyMine extends React.Component {
       </section>
     );
   }
+  render_list() {
+    return (
+      <section className="list">
+        {this.state.list.map((list, index) => (
+          <ul className="outer-list" key={index}>
+            {list.list.map((item) => {
+              if (item.isShow) {
+                return (
+                  <li
+                    key={item.title}
+                    className="inner-list flex"
+                    onClick={() => this.handle_listItem_event(item.title)}
+                  >
+                    <img className="icon-img" src={item.logo} alt="" />
+                    <p className="flex-1 center-title">{item.title}</p>
+                    {item.tips && <p className="right-tips">{item.tips}</p>}
+                    {item.code && (
+                      <img className="right-code" src={item.code} alt="" />
+                    )}
+                    <img
+                      className="right-img"
+                      src={require("../../assets/zymine/more@2x.png")}
+                      alt=""
+                    />
+                  </li>
+                );
+              } else {
+                return false;
+              }
+            })}
+          </ul>
+        ))}
+      </section>
+    );
+  }
   componentDidMount() {
     this.handleKhxxcx();
+  }
+  handle_listItem_event(type) {
+    // console.log(type);
+    const self = this;
+    switch (type) {
+      case "积分中心":
+        window.location.href =
+          "http://m.bocim.com/zyfund/zywx/index.html#/integral";
+        break;
+      case "在线客服":
+        window.location.href =
+          "http://chat.looyuoms.com/chat/chat/p.do?c=20003950&f=10105823&g=10082953";
+        break;
+      case "退出绑定":
+      case "退出登录":
+        alert("", "确认退出登录吗？", [
+          { text: "取消", onPress: () => console.log("cancel") },
+          {
+            text: "确定",
+            onPress: () =>
+              new Promise((resolve) => {
+                self.handleTcdl(resolve);
+              }),
+          },
+        ]);
+        break;
+
+      default:
+        break;
+    }
   }
   render() {
     return (
@@ -98,7 +262,8 @@ class ZyMine extends React.Component {
         <header className="header">
           <div className="headerIcon" />
         </header>
-        {this.person()}
+        {this.render_person()}
+        {this.render_list()}
         <TabBar history={this.props.history} match={this.props.match} />
       </main>
     );

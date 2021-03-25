@@ -45,3 +45,9 @@ export function xtgzrcx({ subFactor }) {
     data: { subFactor },
   });
 }
+
+export function tcdl() {
+  return request("/zy/wechat/user/tcdl", "POST", {
+    data: {},
+  });
+}
